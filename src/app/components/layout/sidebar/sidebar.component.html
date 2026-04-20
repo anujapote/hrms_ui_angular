@@ -1,0 +1,13 @@
+<aside class="sidebar">
+  <div class="sidebar-nav">
+    <button
+      *ngFor="let item of currentSectionItems"
+      type="button"
+      class="sidebar-item"
+      [class.active]="isActive(item.path)"
+      [routerLink]="item.path"
+    >
+      {{ item.label }}
+    </button>
+  </div>
+</aside>

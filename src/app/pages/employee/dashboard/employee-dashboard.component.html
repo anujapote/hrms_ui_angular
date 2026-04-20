@@ -1,0 +1,44 @@
+<div class="page-header">
+  <h2>Employee Dashboard</h2>
+  <p class="page-subtitle">Overview of your employee management metrics</p>
+</div>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-icon">👥</div>
+    <div class="stat-content">
+      <div class="stat-title">Total Employees</div>
+      <div class="stat-value">{{ stats.totalEmployees }}</div>
+    </div>
+  </div>
+  
+  <div class="stat-card">
+    <div class="stat-icon">📩</div>
+    <div class="stat-content">
+      <div class="stat-title">Pending Leave Requests</div>
+      <div class="stat-value">{{ stats.pendingLeaves }}</div>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon">⭐</div>
+    <div class="stat-content">
+      <div class="stat-title">New Employees (30 days)</div>
+      <div class="stat-value">{{ stats.newEmployees }}</div>
+    </div>
+  </div>
+</div>
+
+<div class="dashboard-section mt-8">
+  <h3>Quick Stats</h3>
+  <div class="info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+    <div class="info-card" style="background: white; padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+      <h4>Total Headcount</h4>
+      <p class="info-value" style="font-size: 1.5rem; font-weight: bold; margin-top: 0.5rem;">{{ stats.totalEmployees }}</p>
+    </div>
+    <div class="info-card" style="background: white; padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+      <h4>Actions Required</h4>
+      <p class="info-value" style="font-size: 1.5rem; font-weight: bold; margin-top: 0.5rem; color: #ea580c;">{{ stats.pendingLeaves }}</p>
+    </div>
+  </div>
+</div>

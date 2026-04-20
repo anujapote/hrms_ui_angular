@@ -1,0 +1,62 @@
+<header *ngIf="!loggedIn" class="header-login">
+  <img src="/img/logo1.jpg" alt="HRMS logo" class="header-logo-login" />
+  <div class="header-content-login">
+      <h1>HRMS</h1>
+      <p>Manage your human resources efficiently</p>
+  </div>
+</header>
+
+<header *ngIf="loggedIn" class="header-dashboard">
+  <div class="header-left-dashboard">
+      <img src="/img/logo1.jpg" alt="HRMS logo" class="header-logo-dashboard" />
+      <span class="header-title">HRMS </span>
+  </div>
+
+  <div class="header-menu-dashboard">
+      <button
+          [class]="activeSection === 'employee' ? 'menu-item active-parent' : 'menu-item'"
+          (click)="onSectionClick('employee')"
+          type="button"
+      >
+          Employees
+      </button>
+      <button
+          [class]="activeSection === 'directory' ? 'menu-item active-parent' : 'menu-item'"
+          (click)="onSectionClick('directory')"
+          type="button"
+      >
+          Directory
+      </button>
+      <button
+          [class]="activeSection === 'leave' ? 'menu-item active-parent' : 'menu-item'"
+          (click)="onSectionClick('leave')"
+          type="button"
+      >
+          Leave
+      </button>
+      <button
+          [class]="activeSection === 'attendance' ? 'menu-item active-parent' : 'menu-item'"
+          (click)="onSectionClick('attendance')"
+          type="button"
+      >
+          Attendance
+      </button>
+  </div>
+
+  <div class="header-icons">
+      <button type="button" class="icon-btn" title="Notifications">
+          🔔
+      </button>
+  </div>
+
+  <div *ngIf="user" class="header-user-dashboard">
+      <span class="user-icon">👤</span>
+      <div class="user-info">
+          <div class="user-name">{{ user.name || user.email }}</div>
+          <div class="user-role">HR Manager</div>
+      </div>
+      <button type="button" class="logout-btn-header" (click)="onLogout()">
+          Logout
+      </button>
+  </div>
+</header>

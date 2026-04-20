@@ -1,0 +1,50 @@
+<div class="page-header">
+  <h2>Employee Directory</h2>
+  <p class="page-subtitle">Browse and search the employee directory</p>
+</div>
+
+<div class="search-section">
+  <div class="search-bar">
+    <input 
+      type="text" 
+      class="search-input" 
+      placeholder="Search by name, email, position, or department..."
+      [(ngModel)]="searchQuery"
+    />
+  </div>
+</div>
+
+<div class="table-section">
+  <div class="table-wrapper">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Position</th>
+          <th>Department</th>
+          <th>Leave Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of filteredEmployees">
+          <td>{{ emp.name }}</td>
+          <td>{{ emp.email }}</td>
+          <td>{{ emp.position }}</td>
+          <td>{{ emp.department }}</td>
+          <td>{{ getLeaveBalance(emp.id) }} days</td>
+        </tr>
+        <tr *ngIf="filteredEmployees.length === 0">
+          <td colspan="5" style="text-align: center; padding: 2rem; color: #6b7280;">
+            {{ searchQuery ? 'No employees match your search.' : 'No employees found.' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="directory-stats mt-8" style="background: white; padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+  <p>Total Employees: <strong>{{ employees.length }}</strong></p>
+  <p>Displayed: <strong>{{ filteredEmployees.length }}</strong></p>
+</div>

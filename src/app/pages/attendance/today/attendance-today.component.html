@@ -1,0 +1,43 @@
+<div class="page-header">
+  <h2>Clock In/Out</h2>
+  <p class="page-subtitle">Record your daily attendance</p>
+</div>
+
+<div class="attendance-card" style="background: white; padding: 2rem; border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); max-width: 600px;">
+  <div class="attendance-header" style="border-bottom: 1px solid #e5e7eb; padding-bottom: 1rem; margin-bottom: 1.5rem;">
+    <h3>Today's Record</h3>
+    <p class="attendance-date" style="color: #6b7280;">{{ todayDate }}</p>
+  </div>
+
+  <div class="attendance-controls" style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
+    <button
+      class="btn btn-success btn-lg"
+      (click)="handleClockIn()"
+      [disabled]="todayRecord?.clockInTime"
+    >
+      {{ todayRecord?.clockInTime ? '✓ Clocked In' : 'Clock In' }}
+    </button>
+
+    <button
+      class="btn btn-danger btn-lg"
+      (click)="handleClockOut()"
+      [disabled]="!todayRecord?.clockInTime || !!todayRecord?.clockOutTime"
+    >
+      {{ todayRecord?.clockOutTime ? '✓ Clocked Out' : 'Clock Out' }}
+    </button>
+  </div>
+
+  <div *ngIf="todayRecord" class="attendance-summary mt-8">
+    <h4>Today's Summary</h4>
+    <div class="summary-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+      <div class="summary-item" style="background: #f3f4f6; padding: 1rem; border-radius: 0.25rem;">
+        <label style="display: block; color: #6b7280; font-size: 0.85rem;">Clock In</label>
+        <span class="time" style="font-weight: bold; font-size: 1.1rem;">{{ todayRecord.clockInTime || '-' }}</span>
+      </div>
+      <div class="summary-item" style="background: #f3f4f6; padding: 1rem; border-radius: 0.25rem;">
+        <label style="display: block; color: #6b7280; font-size: 0.85rem;">Clock Out</label>
+        <span class="time" style="font-weight: bold; font-size: 1.1rem;">{{ todayRecord.clockOutTime || '-' }}</span>
+      </div>
+    </div>
+  </div>
+</div>

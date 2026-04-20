@@ -1,0 +1,35 @@
+<div class="page-header">
+  <h2>Rejected Leave Requests</h2>
+  <p class="page-subtitle">View all rejected leave requests</p>
+</div>
+
+<div class="table-section">
+  <div class="table-wrapper">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Employee</th>
+          <th>Type</th>
+          <th>Days</th>
+          <th>Requested On</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let req of rejectedLeaves">
+          <td>{{ req.employeeName }}</td>
+          <td>{{ req.type }}</td>
+          <td>{{ $any(req).days }}</td>
+          <td>{{ req.appliedOn | date }}</td>
+        </tr>
+        <tr *ngIf="rejectedLeaves.length === 0">
+          <td colspan="4" style="text-align: center; padding: 2rem; color: #6b7280;">No rejected leave requests.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="stats-card mt-8" style="background: white; padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+  <h3>Summary</h3>
+  <p class="mt-4">Total Rejected Requests: <strong>{{ rejectedLeaves.length }}</strong></p>
+</div>

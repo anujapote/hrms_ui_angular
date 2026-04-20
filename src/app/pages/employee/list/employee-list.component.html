@@ -1,0 +1,84 @@
+<div class="page-header">
+  <h2>Employee Directory</h2>
+  <p class="page-subtitle">View and manage existing employees</p>
+</div>
+
+<div class="search-section">
+  <div class="search-bar">
+    <input 
+      type="text" 
+      class="search-input" 
+      placeholder="Search by name, email, position, or department..."
+      [(ngModel)]="searchQuery"
+    />
+  </div>
+</div>
+
+<div class="table-section">
+  <div class="table-wrapper">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Position</th>
+          <th>Department</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of filteredEmployees">
+          <td>{{ emp.name }}</td>
+          <td>{{ emp.email }}</td>
+          <td>{{ emp.position }}</td>
+          <td>{{ emp.department }}</td>
+          <td>
+            <div class="action-buttons" style="display: flex; gap: 8px;">
+              <button class="btn btn-sm btn-secondary" (click)="handleEdit(emp)">Edit</button>
+              <button class="btn btn-sm btn-danger" (click)="handleDelete(emp.id)">Delete</button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="filteredEmployees.length === 0">
+          <td colspan="5" style="text-align: center; padding: 2rem; color: #6b7280;">
+            {{ searchQuery ? 'No employees match your search.' : 'No employees found.' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div *ngIf="editingEmployee" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">Edit Employee</h3>
+      <button class="modal-close" (click)="editingEmployee = null">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input class="form-input" [(ngModel)]="editFormData.name" (input)="handleEditChange('name')" />
+        <div class="form-error" *ngIf="errors['name']">{{ errors['name'] }}</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input class="form-input" type="email" [(ngModel)]="editFormData.email" (input)="handleEditChange('email')" />
+        <div class="form-error" *ngIf="errors['email']">{{ errors['email'] }}</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Position</label>
+        <input class="form-input" [(ngModel)]="editFormData.position" (input)="handleEditChange('position')" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Department</label>
+        <input class="form-input" [(ngModel)]="editFormData.department" (input)="handleEditChange('department')" />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="editingEmployee = null">Cancel</button>
+      <button class="btn btn-primary" (click)="handleSaveEdit()">Save Changes</button>
+    </div>
+  </div>
+</div>

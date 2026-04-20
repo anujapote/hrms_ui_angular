@@ -1,0 +1,66 @@
+<div class="auth-page">
+  <div class="auth-container">
+    <div class="auth-card">
+      <h2 class="auth-title">Create Account</h2>
+      <p class="auth-subtitle">Register for HRMS</p>
+
+      <form (ngSubmit)="handleSubmit()" class="auth-form">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input
+            name="name"
+            type="text"
+            class="form-input"
+            [class.input-error]="errors['name']"
+            placeholder="Enter your full name"
+            [(ngModel)]="formData.name"
+            (input)="handleChange('name')"
+            required
+          />
+          <div *ngIf="errors['name']" class="form-error">{{ errors['name'] }}</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input
+            name="email"
+            type="email"
+            class="form-input"
+            [class.input-error]="errors['email']"
+            placeholder="Enter your email"
+            [(ngModel)]="formData.email"
+            (input)="handleChange('email')"
+            required
+          />
+          <div *ngIf="errors['email']" class="form-error">{{ errors['email'] }}</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input
+            name="password"
+            type="password"
+            class="form-input"
+            [class.input-error]="errors['password']"
+            placeholder="Enter a password"
+            [(ngModel)]="formData.password"
+            (input)="handleChange('password')"
+            required
+          />
+          <div *ngIf="errors['password']" class="form-error">{{ errors['password'] }}</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%" [disabled]="isLoading">
+          {{ isLoading ? 'Registering...' : 'Register' }}
+        </button>
+      </form>
+
+      <p class="auth-footer-text">
+        Already have an account?
+        <button type="button" routerLink="/auth/login" class="auth-link">
+          Login here
+        </button>
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="page" *ngIf="!isAuthRoute; else authLayout">
+  <app-header [loggedIn]="!!authService.currentUserValue" [activeSection]="router.url.split('/')[1] || 'employee'" (sectionClick)="handleNavigate($event)"></app-header>
+  
+  <div class="app-container">
+    <app-sidebar></app-sidebar>
+
+    <main class="main-content">
+      <div *ngIf="messageService.message$ | async as msg" class="alert alert-success mb-4" style="padding: 1rem; margin-bottom: 1rem; border-radius: 0.25rem; background: #ecfdf5; color: #065f46; display: flex; justify-content: space-between;">
+        {{ msg }}
+      </div>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+  <app-footer></app-footer>
+</div>
+
+<ng-template #authLayout>
+  <main class="main-content" style="padding: 0;">
+    <div *ngIf="messageService.message$ | async as msg" class="alert alert-success mb-4" style="position: absolute; top: 1rem; left: 50%; transform: translateX(-50%); z-index: 1000; padding: 1rem; margin-bottom: 1rem; border-radius: 0.25rem; background: #ecfdf5; color: #065f46; display: flex; justify-content: space-between;">
+      {{ msg }}
+    </div>
+    <router-outlet></router-outlet>
+  </main>
+</ng-template>

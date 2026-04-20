@@ -1,0 +1,219 @@
+/* Login page header - plain and simple */
+.header-login {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 25px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  width: 96%;
+}
+
+.header-logo-login {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: white;
+  padding: 8px;
+}
+
+.header-content-login {
+  text-align: left;
+}
+
+.header-content-login h1 {
+  margin: 0;
+  font-size: 2rem;           /* Increased size from 2rem to 3rem */
+  font-weight: 700;
+  font-family: var(--heading);
+  color: #faa70ee5;            /* Changed color to yellow */
+}
+
+.header-content-login p {
+  margin: 6px 0 0;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* Dashboard header - dark navbar with horizontal menu */
+.header-dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 40px;
+  background: #2c3e50;
+  color: white;
+  width: 93%;
+  height: 88px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  max-width: 1200px; /* Set the maximum width to match the app container size */
+  margin: 0 auto; /* Center the header within the app container */
+}
+
+.header-left-dashboard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.header-logo-dashboard {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: white;
+  padding: 6px;
+}
+
+.header-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  white-space: nowrap;
+}
+
+.header-menu-dashboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px; /* Further reduced gap between header menus */
+  flex: 1;
+  margin-left: 20px;
+}
+
+.menu-item {
+  background: transparent;
+  border: none;
+  color: #bdc3c7;
+  padding: 0 12px; /* Reduced padding to make the menu buttons smaller */
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+  height: 70px; /* Reduced height for smaller button size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 3px solid transparent;
+}
+
+.menu-item:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.menu-item.active-parent {
+  color: white;
+  border-bottom-color: #007bff;
+}
+
+.header-right-dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  flex-shrink: 0;
+  width: 350px; /* Further increased width for user section */
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 0 14px;
+  height: 44px;
+}
+
+.search-bar input {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 0.95rem;
+  outline: none;
+  width: 180px;
+}
+
+.search-bar input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.header-icons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  padding: 6px;
+}
+
+.icon-btn:hover {
+  opacity: 0.8;
+}
+
+.header-user-dashboard {  
+  width: 250px; /* Increased width for user info section */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 12px;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.user-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.user-info {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.user-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: white;
+}
+
+.user-role {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.logout-btn-header {
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 7px 0px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+  margin-left: auto; /* Pushes the logout button to the far right */
+  align-self: center; /* Ensures the logout button aligns with other header elements */
+}
+
