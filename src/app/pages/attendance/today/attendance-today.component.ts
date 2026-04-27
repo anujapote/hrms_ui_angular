@@ -27,7 +27,14 @@ export class AttendanceTodayComponent implements OnInit {
     if (!this.currentUser) return;
     this.attendanceService.getEmployeeAttendance(this.currentUser.id).subscribe(records => {
       const today = new Date().toISOString().split('T')[0];
-      this.todayRecord = records.find(r => r.date === today) || null;
+      this.todayRecord = records.find(r => {
+        if (r.date === today) return true;
+        if (!r.date && r.id) {
+          const recordDate = new Date(r.id).toISOString().split('T')[0];
+          return recordDate === today;
+        }
+        return false;
+      }) || null;
     });
   }
 

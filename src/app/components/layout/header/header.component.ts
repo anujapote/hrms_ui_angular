@@ -1,6 +1,9 @@
 import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { AuthService, User } from '../../../services/auth.service';
+import { MessageService } from '../../../services/message.service';
+import { MESSAGES } from '../../../constants/app.config';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +18,8 @@ export class HeaderComponent {
   @Output() sectionClick = new EventEmitter<string>();
   
   authService = inject(AuthService);
+  messageService = inject(MessageService);
+  router = inject(Router);
   user: User | null = null;
 
   constructor() {
@@ -30,5 +35,7 @@ export class HeaderComponent {
 
   onLogout() {
     this.authService.logout();
+    this.messageService.add(MESSAGES.LOGOUT_SUCCESS);
+    this.router.navigate(['/auth/login']);
   }
 }

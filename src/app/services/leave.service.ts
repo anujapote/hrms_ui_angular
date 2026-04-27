@@ -24,18 +24,52 @@ export class LeaveService {
   constructor(private http: HttpClient) {}
 
   getLeaveRequests(): Observable<LeaveRequest[]> {
-    return this.http.get<LeaveRequest[]>(this.apiUrl);
+    const leaves = JSON.parse(localStorage.getItem('leaveRequests') || '[]');
+    return new Observable(subscriber => {
+      subscriber.next(leaves);
+      subscriber.complete();
+    });
   }
 
   getEmployeeLeaveRequests(employeeId: number): Observable<LeaveRequest[]> {
-    return this.http.get<LeaveRequest[]>(`${this.apiUrl}/employee/${employeeId}`);
+    const leaves = JSON.parse(localStorage.getItem('leaveRequests') || '[]');
+    const employeeLeaves = leaves.filter((l: any) => l.employeeId === employeeId);
+    return new Observable(subscriber => {
+      subscriber.next(employeeLeaves);
+      subscriber.complete();
+    });
   }
 
   createLeaveRequest(request: any): Observable<LeaveRequest> {
-    return this.http.post<LeaveRequest>(this.apiUrl, request);
+    const leaves = JSON.parse(localStorage.getItem('leaveRequests') || '[]');
+    const newRequest = { 
+      ...request, 
+      id: Date.now(), 
+      status: 'Pending', 
+      appliedOn: new Date().toISOString() 
+    };
+    leaves.push(newRequest);
+    localStorage.setItem('leaveRequests', JSON.stringify(leaves));
+    return new Observable(subscriber => {
+      subscriber.next(newRequest);
+      subscriber.complete();
+    });
   }
 
   updateLeaveStatus(id: number, status: string): Observable<LeaveRequest> {
-    return this.http.patch<LeaveRequest>(`${this.apiUrl}/${id}/status`, { status });
+    const leaves = JSON.parse(localStorage.getItem('leaveRequests') || '[]');
+    const index = leaves.findIndex((l: any) => l.id === id);
+    if (index !== -1) {
+      leaves[index].status = status;
+      localStorage.setItem('leaveRequests', JSON.stringify(leaves));
+      return new Observable(subscriber => {
+        subscriber.next(leaves[index]);
+        subscriber.complete();
+      });
+    }
+    return new Observable(subscriber => {
+      subscriber.error('Leave request not found');
+      subscriber.complete();
+    });
   }
 }

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { EmployeeService } from '../../../services/employee.service';
 import { MessageService } from '../../../services/message.service';
 import { MESSAGES } from '../../../constants/app.config';
@@ -71,11 +71,9 @@ export class EmployeeRegistrationComponent {
     }
   }
 
-  handleSubmit() {
-    // Basic validation
-    if (!this.formData.firstName || !this.formData.email) {
-      this.errors['firstName'] = !this.formData.firstName ? 'Required' : '';
-      this.errors['email'] = !this.formData.email ? 'Required' : '';
+  handleSubmit(form: NgForm) {
+    if (form.invalid) {
+      this.messageService.add('Please fill in all required fields correctly');
       return;
     }
 
@@ -112,6 +110,7 @@ export class EmployeeRegistrationComponent {
         this.messageService.add(MESSAGES.EMPLOYEE_ADD_SUCCESS);
         this.isLoading = false;
         // reset form
+        form.resetForm();
         this.formData = {
           firstName: '', lastName: '', email: '', phone: '',
           dateOfJoining: '', dateOfBirth: '', position: '', department: '',

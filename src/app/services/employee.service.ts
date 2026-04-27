@@ -22,22 +22,61 @@ export class EmployeeService {
   constructor(private http: HttpClient) {}
 
   getEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.apiUrl);
+    const employees = JSON.parse(localStorage.getItem('employees') || '[]');
+    return new Observable(subscriber => {
+      subscriber.next(employees);
+      subscriber.complete();
+    });
   }
 
   getEmployee(id: number): Observable<Employee> {
-    return this.http.get<Employee>(`${this.apiUrl}/${id}`);
+    const employees = JSON.parse(localStorage.getItem('employees') || '[]');
+    const employee = employees.find((e: any) => e.id === id);
+    return new Observable(subscriber => {
+      if (employee) {
+        subscriber.next(employee);
+      } else {
+        subscriber.error('Employee not found');
+      }
+      subscriber.complete();
+    });
   }
 
   createEmployee(employee: any): Observable<Employee> {
-    return this.http.post<Employee>(this.apiUrl, employee);
+    const employees = JSON.parse(localStorage.getItem('employees') || '[]');
+    const newEmployee = { ...employee, id: Date.now(), status: 'Active', joinDate: new Date().toISOString() };
+    employees.push(newEmployee);
+    localStorage.setItem('employees', JSON.stringify(employees));
+    return new Observable(subscriber => {
+      subscriber.next(newEmployee);
+      subscriber.complete();
+    });
   }
 
   updateEmployee(id: number, employee: any): Observable<Employee> {
-    return this.http.put<Employee>(`${this.apiUrl}/${id}`, employee);
+    const employees = JSON.parse(localStorage.getItem('employees') || '[]');
+    const index = employees.findIndex((e: any) => e.id === id);
+    if (index !== -1) {
+      employees[index] = { ...employees[index], ...employee };
+      localStorage.setItem('employees', JSON.stringify(employees));
+      return new Observable(subscriber => {
+        subscriber.next(employees[index]);
+        subscriber.complete();
+      });
+    }
+    return new Observable(subscriber => {
+      subscriber.error('Employee not found');
+      subscriber.complete();
+    });
   }
 
   deleteEmployee(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    let employees = JSON.parse(localStorage.getItem('employees') || '[]');
+    employees = employees.filter((e: any) => e.id !== id);
+    localStorage.setItem('employees', JSON.stringify(employees));
+    return new Observable(subscriber => {
+      subscriber.next({ success: true });
+      subscriber.complete();
+    });
   }
 }

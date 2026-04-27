@@ -16,7 +16,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let row of attendanceHistory">
-          <td>{{ row.date | date }}</td>
+          <td>{{ (row.date || row.id) | date }}</td>
           <td>{{ row.clockInTime || '-' }}</td>
           <td>{{ row.clockOutTime || '-' }}</td>
           <td>{{ getDuration(row) }}</td>

@@ -7,7 +7,8 @@ import { LeaveService } from '../../../services/leave.service';
   selector: 'app-employee-dashboard',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './employee-dashboard.component.html'
+  templateUrl: './employee-dashboard.component.html',
+  styleUrl: './employee-dashboard.component.scss'
 })
 export class EmployeeDashboardComponent implements OnInit {
   employeeService = inject(EmployeeService);

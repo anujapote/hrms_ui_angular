@@ -7,7 +7,8 @@ import { SECTION_ROUTES } from '../../../constants/routes';
   selector: 'app-sidebar',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './sidebar.component.html'
+  templateUrl: './sidebar.component.html',
+  styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent implements OnInit {
   currentSectionItems: any[] = [];

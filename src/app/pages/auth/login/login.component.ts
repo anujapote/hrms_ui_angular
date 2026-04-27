@@ -43,7 +43,8 @@ export class LoginComponent {
         this.isLoading = false;
       },
       error: (err) => {
-        this.messageService.add(MESSAGES.INVALID_PASSWORD);
+        const errorMessage = err.error?.message || MESSAGES.INVALID_PASSWORD;
+        this.messageService.add(errorMessage);
         this.isLoading = false;
       }
     });

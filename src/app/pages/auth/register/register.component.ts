@@ -42,7 +42,8 @@ export class RegisterComponent {
         setTimeout(() => this.router.navigate(['/auth/login']), 1500);
       },
       error: (err) => {
-        this.messageService.add(MESSAGES.USER_ALREADY_EXISTS);
+        const errorMessage = err.error?.message || MESSAGES.USER_ALREADY_EXISTS;
+        this.messageService.add(errorMessage);
         this.isLoading = false;
       }
     });
